@@ -20,4 +20,13 @@ function priceChange(id){let p=products.find(x=>x.id==id),v=prompt("নতুন
 document.getElementById("orderForm").onsubmit=e=>{e.preventDefault();let ids=Object.keys(cart);if(!ids.length){alert("আগে পণ্য কার্টে যোগ করুন");return}let lines=ids.map(id=>{let p=products.find(x=>x.id==id);return `${p.name} x ${cart[id]} = ${money(p.price*.9*cart[id])}`}),sum=ids.reduce((s,id)=>s+products.find(p=>p.id==id).price*.9*cart[id],0),o={date:new Date().toLocaleString(),name:cust.value,phone:phone.value,items:lines,total:money(sum),address:district.value+", "+area.value+", "+address.value,notes:notes.value,status:"নতুন"};let orders=JSON.parse(localStorage.getItem("sf_orders")||"[]");orders.unshift(o);localStorage.setItem("sf_orders",JSON.stringify(orders));showOrders();let msg=`STARLING FASHION ORDER\n${lines.join("\n")}\nমোট: ${money(sum)}\nনাম: ${o.name}\nমোবাইল: ${o.phone}\nঠিকানা: ${o.address}\nঅতিরিক্ত: ${o.notes}`;window.open("https://wa.me/8801624466213?text="+encodeURIComponent(msg),"_blank")}
 function showOrders(){let a=JSON.parse(localStorage.getItem("sf_orders")||"[]");orders.innerHTML=a.length?a.map(o=>`<p class="muted"><b>${o.name}</b> (${o.date})<br>${o.items.join("<br>")}<br>মোট ${o.total} • ${o.status}</p>`).join(""):"এখনো অর্ডার নেই।"}function backup(){let blob=new Blob([JSON.stringify({products,orders:JSON.parse(localStorage.getItem("sf_orders")||"[]")},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="starling-fashion-backup.json";a.click();URL.revokeObjectURL(a.href)}
 document.getElementById("year").textContent=new Date().getFullYear();draw();drawCart();showOrders();
-</script></body></html>
+</script>// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyASLbdX8xVMOm0ptTQqjqaFdfUVwEd439U",
+  authDomain: "starlingadmin-213.firebaseapp.com",
+  projectId: "starlingadmin-213",
+  storageBucket: "starlingadmin-213.firebasestorage.app",
+  messagingSenderId: "380784734975",
+  appId: "1:380784734975:web:792fa58d2c4cb468d852ca",
+  measurementId: "G-6X9KC5NDGY"
+};</body></html>
