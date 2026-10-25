@@ -645,14 +645,14 @@ window.backup = async function() {
       }))
     };
 
-    const blob = new Blob(
-      [JSON.stringify(data, null, 2, (key, value) =>
-        value && typeof value.toDate === "function"
-          ? value.toDate().toISOString()
-          : value
-      )],
-      { type: "application/json" }
-    );
+   const blob = new Blob(
+  [JSON.stringify(data, null, 2, (key, value) =>
+    value && typeof value.toDate === "function"
+      ? value.toDate().toISOString()
+      : value
+  )],
+  { type: "application/json" }
+);
 
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
