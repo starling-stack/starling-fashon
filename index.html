@@ -9,17 +9,679 @@
 <section class="section" id="order"><div class="wrap"><h2 class="title">আপনার <span class="gold">অর্ডার</span></h2><div class="panel"><div id="cart">কার্ট খালি।</div><div class="total"><span>১০% ছাড়ের পর মোট</span><span id="total">৳০</span></div><form id="orderForm"><div class="row"><input id="cust" required placeholder="আপনার নাম *"><input id="phone" required placeholder="মোবাইল নম্বর *"><input id="district" required placeholder="জেলা *"><input id="area" required placeholder="উপজেলা/এলাকা *"></div><textarea id="address" required placeholder="সম্পূর্ণ ঠিকানা *"></textarea><textarea id="notes" placeholder="সাইজ/রং/অতিরিক্ত তথ্য"></textarea><button>WhatsApp-এ অর্ডার পাঠান</button></form></div></div></section>
 <section class="section admin" id="admin"><div class="wrap"><details><summary>⚙️ অ্যাডমিন প্যানেল — পণ্য, দাম ও অর্ডার</summary><p class="small">ডেমো প্যানেল: তথ্য এই ব্রাউজারেই সংরক্ষিত হয়; অন্য ডিভাইসে sync হয় না। বাস্তব নিরাপদ অনলাইন অ্যাডমিনের জন্য backend/database ও login দরকার।</p><div class="adminGrid"><div class="panel"><h3>নতুন পণ্য যোগ করুন</h3><form id="addProduct"><input id="pn" required placeholder="পণ্যের নাম"><input id="pp" required type="number" min="1" placeholder="মূল দাম (৳)"><input id="ps" placeholder="সাইজ (যেমন M,L,XL)"><input id="pe" placeholder="ইমোজি (যেমন 👕)"><textarea id="pd" placeholder="বিবরণ"></textarea><button>পণ্য যোগ করুন</button></form><div id="manageProducts"></div></div><div class="panel"><h3>অর্ডার তালিকা</h3><div id="orders">এখনো অর্ডার নেই।</div><button type="button" onclick="backup()">JSON ব্যাকআপ ডাউনলোড</button><p class="small">WhatsApp-এ পাঠানো অর্ডারও ক্রেতার WhatsApp-এ নিশ্চিত করতে হবে।</p></div></div></details></div></section>
 <section class="contact"><div class="wrap"><h2>STARLING FASHION</h2><p>📍 চর লরেঞ্চ উত্তর বাজার<br>WhatsApp: 01614-466213<br>সারা বাংলাদেশে ডেলিভারি অর্ডার</p><a class="btn" href="https://wa.me/8801624466213">WhatsApp-এ যোগাযোগ</a></div></section><footer>© <span id="year"></span> STARLING FASHION • Style Makes You Unique</footer>
-<script>
-const initial=[{id:1,name:"ক্লাসিক টি-শার্ট",price:450,size:"M,L,XL",emoji:"👕",desc:"ক্যাজুয়াল টি-শার্ট"},{id:2,name:"প্রিমিয়াম পাঞ্জাবি",price:1250,size:"M,L,XL,XXL",emoji:"🥻",desc:"উৎসবের মার্জিত পাঞ্জাবি"},{id:3,name:"কিডস ফ্যাশন সেট",price:650,size:"বয়স/সাইজ জানান",emoji:"🧒",desc:"ছোটদের ট্রেন্ডি পোশাক"},{id:4,name:"পোলো টি-শার্ট",price:550,size:"M,L,XL",emoji:"👕",desc:"স্মার্ট ক্যাজুয়াল লুক"},{id:5,name:"ক্যাজুয়াল শার্ট",price:850,size:"M,L,XL,XXL",emoji:"👔",desc:"স্টাইলিশ শার্ট"},{id:6,name:"জেন্টস পাঞ্জাবি",price:1450,size:"M,L,XL,XXL",emoji:"🥻",desc:"আকর্ষণীয় পাঞ্জাবি"}];
-let products=JSON.parse(localStorage.getItem("sf_products")||"null")||initial,cart={};const money=n=>"৳"+Math.round(n).toLocaleString("bn-BD");
-function save(){localStorage.setItem("sf_products",JSON.stringify(products))}
-function draw(){productsGrid.innerHTML=products.map(p=>`<div class="card"><div class="photo">${p.emoji||"👕"}</div><h3>${p.name}</h3><p class="muted">${p.desc||""}<br>সাইজ: ${p.size||"জানতে যোগাযোগ করুন"}</p><div class="price">${money(p.price*.9)} <small style="text-decoration:line-through;color:#888">${money(p.price)}</small></div><button onclick="add(${p.id})">কার্টে যোগ করুন</button></div>`).join("");manageProducts.innerHTML="<h4>পণ্য পরিবর্তন</h4>"+products.map(p=>`<p>${p.name} — ${money(p.price)} <button onclick="priceChange(${p.id})">দাম</button> <button onclick="del(${p.id})">মুছুন</button></p>`).join("")}
-function add(id){cart[id]=(cart[id]||0)+1;drawCart()}function drawCart(){let ids=Object.keys(cart),sum=0;cartDiv="";document.getElementById("cart").innerHTML=ids.length?ids.map(id=>{let p=products.find(x=>x.id==id);if(!p)return "";let sub=p.price*.9*cart[id];sum+=sub;return `<div class="cartrow">${p.name} × ${cart[id]} — ${money(sub)} <button onclick="removeItem(${id})">বাদ</button></div>`}).join(""):"কার্ট খালি।";document.getElementById("total").textContent=money(sum)}function removeItem(id){delete cart[id];drawCart()}
-document.getElementById("addProduct").onsubmit=e=>{e.preventDefault();products.unshift({id:Date.now(),name:pn.value,price:+pp.value,size:ps.value,emoji:pe.value||"👕",desc:pd.value});save();draw();e.target.reset()}
-function priceChange(id){let p=products.find(x=>x.id==id),v=prompt("নতুন মূল দাম",p.price);if(v!==null&&+v>0){p.price=+v;save();draw();drawCart()}}function del(id){if(confirm("পণ্য মুছবেন?")){products=products.filter(p=>p.id!=id);save();draw();drawCart()}}
-document.getElementById("orderForm").onsubmit=e=>{e.preventDefault();let ids=Object.keys(cart);if(!ids.length){alert("আগে পণ্য কার্টে যোগ করুন");return}let lines=ids.map(id=>{let p=products.find(x=>x.id==id);return `${p.name} x ${cart[id]} = ${money(p.price*.9*cart[id])}`}),sum=ids.reduce((s,id)=>s+products.find(p=>p.id==id).price*.9*cart[id],0),o={date:new Date().toLocaleString(),name:cust.value,phone:phone.value,items:lines,total:money(sum),address:district.value+", "+area.value+", "+address.value,notes:notes.value,status:"নতুন"};let orders=JSON.parse(localStorage.getItem("sf_orders")||"[]");orders.unshift(o);localStorage.setItem("sf_orders",JSON.stringify(orders));showOrders();let msg=`STARLING FASHION ORDER\n${lines.join("\n")}\nমোট: ${money(sum)}\nনাম: ${o.name}\nমোবাইল: ${o.phone}\nঠিকানা: ${o.address}\nঅতিরিক্ত: ${o.notes}`;window.open("https://wa.me/8801624466213?text="+encodeURIComponent(msg),"_blank")}
-function showOrders(){let a=JSON.parse(localStorage.getItem("sf_orders")||"[]");orders.innerHTML=a.length?a.map(o=>`<p class="muted"><b>${o.name}</b> (${o.date})<br>${o.items.join("<br>")}<br>মোট ${o.total} • ${o.status}</p>`).join(""):"এখনো অর্ডার নেই।"}function backup(){let blob=new Blob([JSON.stringify({products,orders:JSON.parse(localStorage.getItem("sf_orders")||"[]")},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="starling-fashion-backup.json";a.click();URL.revokeObjectURL(a.href)}
-document.getElementById("year").textContent=new Date().getFullYear();draw();drawCart();showOrders();
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  onSnapshot,
+  doc,
+  updateDoc,
+  deleteDoc,
+  serverTimestamp,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
+
+/* FIREBASE CONFIGURATION */
+const firebaseConfig = {
+  apiKey: "AIzaSyASLbdX8xVMOm0ptTQqjqaFdfUVwEd439U",
+  authDomain: "starlingadmin-213.firebaseapp.com",
+  projectId: "starlingadmin-213",
+  storageBucket: "starlingadmin-213.firebasestorage.app",
+  messagingSenderId: "380784734975",
+  appId: "1:380784734975:web:792fa58d2c4cb468d852ca",
+  measurementId: "G-6X9KC5NDGY"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+
+/* HTML ELEMENTS */
+const $ = id => document.getElementById(id);
+
+const productsGrid = $("productsGrid");
+const manageProducts = $("manageProducts");
+const cartElement = $("cart");
+const totalElement = $("total");
+const ordersElement = $("orders");
+
+const money = n =>
+  "৳" + Math.round(Number(n) || 0).toLocaleString("bn-BD");
+
+
+/* SAMPLE PRODUCTS */
+const initialProducts = [
+  {
+    id: "demo1",
+    name: "ক্লাসিক টি-শার্ট",
+    price: 450,
+    size: "M,L,XL",
+    emoji: "👕",
+    desc: "ক্যাজুয়াল টি-শার্ট"
+  },
+  {
+    id: "demo2",
+    name: "প্রিমিয়াম পাঞ্জাবি",
+    price: 1250,
+    size: "M,L,XL,XXL",
+    emoji: "🥻",
+    desc: "উৎসবের মার্জিত পাঞ্জাবি"
+  },
+  {
+    id: "demo3",
+    name: "কিডস ফ্যাশন সেট",
+    price: 650,
+    size: "বয়স/সাইজ জানান",
+    emoji: "🧒",
+    desc: "ছোটদের ট্রেন্ডি পোশাক"
+  },
+  {
+    id: "demo4",
+    name: "পোলো টি-শার্ট",
+    price: 550,
+    size: "M,L,XL",
+    emoji: "👕",
+    desc: "স্মার্ট ক্যাজুয়াল লুক"
+  },
+  {
+    id: "demo5",
+    name: "ক্যাজুয়াল শার্ট",
+    price: 850,
+    size: "M,L,XL,XXL",
+    emoji: "👔",
+    desc: "স্টাইলিশ শার্ট"
+  },
+  {
+    id: "demo6",
+    name: "জেন্টস পাঞ্জাবি",
+    price: 1450,
+    size: "M,L,XL,XXL",
+    emoji: "🥻",
+    desc: "আকর্ষণীয় পাঞ্জাবি"
+  }
+];
+
+let products = [...initialProducts];
+let cart = {};
+let adminUser = null;
+let firestoreProducts = [];
+let productsLoaded = false;
+
+
+/* SHOW MESSAGES */
+function notify(message) {
+  alert(message);
+}
+
+
+/* ADMIN LOGIN PANEL */
+const adminDetails = document.querySelector("#admin details");
+
+const loginPanel = document.createElement("div");
+loginPanel.className = "panel";
+loginPanel.style.marginBottom = "16px";
+
+loginPanel.innerHTML = `
+  <h3>🔐 অ্যাডমিন লগইন</h3>
+  <p class="small">পণ্য যোগ বা পরিবর্তন করতে অ্যাডমিন হিসেবে লগইন করুন।</p>
+
+  <form id="firebaseLogin">
+    <input id="adminEmail" type="email"
+      placeholder="অ্যাডমিন ইমেইল" required>
+
+    <input id="adminPassword" type="password"
+      placeholder="অ্যাডমিন পাসওয়ার্ড" required>
+
+    <button type="submit">লগইন করুন</button>
+  </form>
+
+  <div id="loginStatus" class="small" style="margin-top:10px"></div>
+  <button id="logoutButton" type="button" style="display:none">
+    লগআউট
+  </button>
+`;
+
+if (adminDetails) {
+  adminDetails.insertBefore(loginPanel, adminDetails.children[1] || null);
+}
+
+
+/* ADMIN LOGIN */
+$("firebaseLogin").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const email = $("adminEmail").value.trim();
+  const password = $("adminPassword").value;
+
+  $("loginStatus").textContent = "লগইন হচ্ছে...";
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    $("adminPassword").value = "";
+    $("loginStatus").textContent = "লগইন সফল হয়েছে।";
+  } catch (error) {
+    console.error(error);
+    $("loginStatus").textContent =
+      "লগইন হয়নি। ইমেইল, পাসওয়ার্ড ও Firebase Authentication পরীক্ষা করুন।";
+  }
+});
+
+
+$("logoutButton").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    $("loginStatus").textContent = "আপনি লগআউট করেছেন।";
+  } catch (error) {
+    console.error(error);
+    notify("লগআউট করতে সমস্যা হয়েছে।");
+  }
+});
+
+
+/* PRODUCT DISPLAY */
+function draw() {
+  if (!productsGrid) return;
+
+  productsGrid.innerHTML = products.map(p => `
+    <div class="card">
+      <div class="photo">${escapeHTML(p.emoji || "👕")}</div>
+
+      <h3>${escapeHTML(p.name)}</h3>
+
+      <p class="muted">
+        ${escapeHTML(p.desc || "")}<br>
+        সাইজ: ${escapeHTML(p.size || "জানতে যোগাযোগ করুন")}
+      </p>
+
+      <div class="price">
+        ${money(Number(p.price) * 0.9)}
+        <small style="text-decoration:line-through;color:#888">
+          ${money(p.price)}
+        </small>
+      </div>
+
+      <button type="button" onclick="window.addToCart('${p.id}')">
+        কার্টে যোগ করুন
+      </button>
+    </div>
+  `).join("");
+
+  drawManageProducts();
+}
+
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+
+function drawManageProducts() {
+  if (!manageProducts) return;
+
+  if (!adminUser) {
+    manageProducts.innerHTML =
+      "<p class='small'>পণ্য পরিচালনা করতে অ্যাডমিন লগইন করুন।</p>";
+    return;
+  }
+
+  const savedProducts = products.filter(p => !p.id.startsWith("demo"));
+
+  manageProducts.innerHTML =
+    "<h4>পণ্য পরিবর্তন</h4>" +
+    (
+      savedProducts.length
+        ? savedProducts.map(p => `
+          <div class="cartrow">
+            <span>
+              ${escapeHTML(p.name)} — ${money(p.price)}
+            </span>
+
+            <span>
+              <button type="button"
+                onclick="window.changeProductPrice('${p.id}')">
+                দাম
+              </button>
+
+              <button type="button"
+                onclick="window.deleteProduct('${p.id}')">
+                মুছুন
+              </button>
+            </span>
+          </div>
+        `).join("")
+        : "<p>এখনো কোনো অনলাইন পণ্য যোগ করা হয়নি।</p>"
+    );
+}
+
+
+/* CART */
+window.addToCart = function(id) {
+  const product = products.find(p => p.id === id);
+  if (!product) return;
+
+  cart[id] = (cart[id] || 0) + 1;
+  drawCart();
+};
+
+
+window.removeCartItem = function(id) {
+  delete cart[id];
+  drawCart();
+};
+
+
+function drawCart() {
+  if (!cartElement || !totalElement) return;
+
+  const ids = Object.keys(cart);
+  let sum = 0;
+
+  if (!ids.length) {
+    cartElement.textContent = "কার্ট খালি।";
+    totalElement.textContent = money(0);
+    return;
+  }
+
+  cartElement.innerHTML = ids.map(id => {
+    const p = products.find(item => item.id === id);
+    if (!p) return "";
+
+    const subtotal = Number(p.price) * 0.9 * cart[id];
+    sum += subtotal;
+
+    return `
+      <div class="cartrow">
+        <span>
+          ${escapeHTML(p.name)} × ${cart[id]} — ${money(subtotal)}
+        </span>
+
+        <button type="button"
+          onclick="window.removeCartItem('${id}')">
+          বাদ
+        </button>
+      </div>
+    `;
+  }).join("");
+
+  totalElement.textContent = money(sum);
+}
+
+
+/* ADD PRODUCT TO FIRESTORE */
+$("addProduct").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!adminUser) {
+    notify("আগে অ্যাডমিন লগইন করুন।");
+    return;
+  }
+
+  const name = $("pn").value.trim();
+  const price = Number($("pp").value);
+
+  if (!name || !Number.isFinite(price) || price <= 0) {
+    notify("পণ্যের নাম ও সঠিক দাম দিন।");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "products"), {
+      name,
+      price,
+      size: $("ps").value.trim(),
+      emoji: $("pe").value.trim() || "👕",
+      desc: $("pd").value.trim(),
+      createdAt: serverTimestamp()
+    });
+
+    event.target.reset();
+    notify("পণ্য অনলাইনে সংরক্ষণ হয়েছে।");
+  } catch (error) {
+    console.error(error);
+    notify("পণ্য যোগ হয়নি। Firebase Rules ও লগইন পরীক্ষা করুন।");
+  }
+});
+
+
+/* CHANGE PRODUCT PRICE */
+window.changeProductPrice = async function(id) {
+  if (!adminUser) return notify("আগে অ্যাডমিন লগইন করুন।");
+
+  const product = products.find(p => p.id === id);
+  if (!product) return;
+
+  const input = prompt("নতুন মূল দাম লিখুন:", product.price);
+  if (input === null) return;
+
+  const newPrice = Number(input);
+
+  if (!Number.isFinite(newPrice) || newPrice <= 0) {
+    return notify("সঠিক দাম লিখুন।");
+  }
+
+  try {
+    await updateDoc(doc(db, "products", id), {
+      price: newPrice
+    });
+
+    notify("পণ্যের দাম পরিবর্তন হয়েছে।");
+  } catch (error) {
+    console.error(error);
+    notify("দাম পরিবর্তন হয়নি। Firebase Rules পরীক্ষা করুন।");
+  }
+};
+
+
+/* DELETE PRODUCT */
+window.deleteProduct = async function(id) {
+  if (!adminUser) return notify("আগে অ্যাডমিন লগইন করুন।");
+
+  if (!confirm("এই পণ্যটি মুছে ফেলতে চান?")) return;
+
+  try {
+    await deleteDoc(doc(db, "products", id));
+    notify("পণ্য মুছে ফেলা হয়েছে।");
+  } catch (error) {
+    console.error(error);
+    notify("পণ্য মুছতে সমস্যা হয়েছে।");
+  }
+};
+
+
+/* LIVE FIRESTORE PRODUCTS */
+onSnapshot(
+  collection(db, "products"),
+  snapshot => {
+    productsLoaded = true;
+
+    firestoreProducts = snapshot.docs
+      .map(item => {
+        const data = item.data();
+
+        return {
+          id: item.id,
+          name: data.name,
+          price: Number(data.price),
+          size: data.size || "",
+          emoji: data.emoji || "👕",
+          desc: data.desc || ""
+        };
+      })
+      .filter(p =>
+        typeof p.name === "string" &&
+        p.name.trim() !== "" &&
+        Number.isFinite(p.price) &&
+        p.price > 0
+      );
+
+    products = firestoreProducts.length
+      ? firestoreProducts
+      : [...initialProducts];
+
+    draw();
+    drawCart();
+  },
+  error => {
+    console.error(error);
+    notify("অনলাইন পণ্য লোড হয়নি। Firebase Firestore Rules পরীক্ষা করুন।");
+  }
+);
+
+
+/* ORDER SUBMISSION */
+$("orderForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const ids = Object.keys(cart);
+
+  if (!ids.length) {
+    notify("আগে কার্টে পণ্য যোগ করুন।");
+    return;
+  }
+
+  const customerName = $("cust").value.trim();
+  const phoneNumber = $("phone").value.trim();
+  const district = $("district").value.trim();
+  const area = $("area").value.trim();
+  const address = $("address").value.trim();
+  const notes = $("notes").value.trim();
+
+  const items = ids.map(id => {
+    const p = products.find(item => item.id === id);
+
+    return {
+      productId: id,
+      name: p.name,
+      price: Number(p.price),
+      quantity: cart[id]
+    };
+  });
+
+  const subtotal = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const discount = subtotal * 0.1;
+  const total = subtotal - discount;
+
+  const order = {
+    customerName,
+    phone: phoneNumber,
+    district,
+    area,
+    address,
+    notes,
+    items,
+    subtotal,
+    discount,
+    total,
+    status: "নতুন",
+    createdAt: serverTimestamp()
+  };
+
+  try {
+    await addDoc(collection(db, "orders"), order);
+
+    const lines = items.map(item =>
+      ${item.name} × ${item.quantity} = ${money(item.price * item.quantity)}
+    );
+
+    const message =
+      STARLING FASHION ORDER\n\n +
+      ${lines.join("\n")}\n\n +
+      মূল দাম: ${money(subtotal)}\n +
+      ছাড়: ${money(discount)}\n +
+      মোট: ${money(total)}\n\n +
+      নাম: ${customerName}\n +
+      মোবাইল: ${phoneNumber}\n +
+      ঠিকানা: ${district}, ${area}, ${address}\n +
+      অতিরিক্ত: ${notes};
+
+    window.open(
+      "https://wa.me/8801624466213?text=" +
+      encodeURIComponent(message),
+      "_blank"
+    );
+
+    cart = {};
+    drawCart();
+    event.target.reset();
+
+    notify("অর্ডার সংরক্ষণ হয়েছে। WhatsApp-এ অর্ডার পাঠিয়ে নিশ্চিত করুন।");
+
+  } catch (error) {
+    console.error(error);
+    notify(
+      "অর্ডার সংরক্ষণ হয়নি। ইন্টারনেট ও Firestore Rules পরীক্ষা করুন।"
+    );
+  }
+});
+
+
+/* ADMIN ORDER LIST */
+let stopOrdersListener = null;
+
+function listenToOrders() {
+  if (stopOrdersListener) {
+    stopOrdersListener();
+    stopOrdersListener = null;
+  }
+
+  if (!adminUser) {
+    if (ordersElement) {
+      ordersElement.textContent = "অর্ডার দেখতে অ্যাডমিন লগইন করুন।";
+    }
+    return;
+  }
+
+  const ordersQuery = query(
+    collection(db, "orders"),
+    orderBy("createdAt", "desc")
+  );
+
+  stopOrdersListener = onSnapshot(
+    ordersQuery,
+    snapshot => {
+      if (!ordersElement) return;
+
+      if (snapshot.empty) {
+        ordersElement.textContent = "এখনো কোনো অর্ডার নেই।";
+        return;
+      }
+
+      ordersElement.innerHTML = snapshot.docs.map(item => {
+        const o = item.data();
+        const itemLines = (o.items || []).map(i =>
+          ${escapeHTML(i.name)} × ${Number(i.quantity) || 0}
+        ).join("<br>");
+
+        return `
+          <div class="panel" style="margin:10px 0">
+            <b>${escapeHTML(o.customerName || "নাম নেই")}</b>
+            <p class="muted">
+              মোবাইল: ${escapeHTML(o.phone || "")}<br>
+              ঠিকানা: ${escapeHTML(o.district || "")},
+              ${escapeHTML(o.area || "")},
+              ${escapeHTML(o.address || "")}<br>
+              ${itemLines}<br>
+              মোট: ${money(o.total)}<br>
+              অবস্থা: ${escapeHTML(o.status || "নতুন")}
+            </p>
+          </div>
+        `;
+      }).join("");
+    },
+    error => {
+      console.error(error);
+      ordersElement.textContent =
+        "অর্ডার দেখা যাচ্ছে না। Firebase Rules পরীক্ষা করুন।";
+    }
+  );
+}
+
+
+/* AUTHENTICATION STATUS */
+onAuthStateChanged(auth, user => {
+  adminUser = user;
+
+  $("adminEmail").disabled = Boolean(user);
+  $("adminPassword").style.display = user ? "none" : "block";
+  $("firebaseLogin").querySelector("button").style.display =
+    user ? "none" : "inline-block";
+
+  $("logoutButton").style.display = user ? "inline-block" : "none";
+
+  $("loginStatus").textContent = user
+    ? "অ্যাডমিন লগইন সফল।"
+    : "আপনি লগইন করেননি।";
+
+  drawManageProducts();
+  listenToOrders();
+});
+
+
+/* BACKUP */
+window.backup = async function() {
+  if (!adminUser) {
+    notify("ব্যাকআপ নিতে আগে অ্যাডমিন লগইন করুন।");
+    return;
+  }
+
+  try {
+    const [productSnapshot, orderSnapshot] = await Promise.all([
+      getDocs(collection(db, "products")),
+      getDocs(collection(db, "orders"))
+    ]);
+
+    const data = {
+      products: productSnapshot.docs.map(d => ({
+        id: d.id,
+        ...d.data()
+      })),
+      orders: orderSnapshot.docs.map(d => ({
+        id: d.id,
+        ...d.data()
+      }))
+    };
+
+    const blob = new Blob(
+      [JSON.stringify(data, null, 2, (key, value) =>
+        value && typeof value.toDate === "function"
+          ? value.toDate().toISOString()
+          : value
+      )],
+      { type: "application/json" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = "starling-fashion-backup.json";
+    a.click();
+
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error(error);
+    notify("ব্যাকআপ তৈরি হয়নি।");
+  }
+};
+
+
+/* FOOTER YEAR */
+if ($("year")) {
+  $("year").textContent = new Date().getFullYear();
+}
+
+
+/* INITIAL DISPLAY */
+draw();
+drawCart();
+
+if (ordersElement) {
+  ordersElement.textContent = "অর্ডার লোড হচ্ছে...";
+}
 </script>
 };
 </body>
