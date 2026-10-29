@@ -507,16 +507,16 @@ $("orderForm").addEventListener("submit", async event => {
       ${item.name} × ${item.quantity} = ${money(item.price * item.quantity)}
     );
 
-    const message =
-      STARLING FASHION ORDER\n\n +
-      ${lines.join("\n")}\n\n +
-      মূল দাম: ${money(subtotal)}\n +
-      ছাড়: ${money(discount)}\n +
-      মোট: ${money(total)}\n\n +
-      নাম: ${customerName}\n +
-      মোবাইল: ${phoneNumber}\n +
-      ঠিকানা: ${district}, ${area}, ${address}\n +
-      অতিরিক্ত: ${notes};
+const message =
+  STARLING FASHION ORDER\n\n +
+  ${lines.join("\n")}\n\n +
+  মূল দাম: ${money(subtotal)}\n +
+  ছাড়: ${money(discount)}\n +
+  মোট: ${money(total)}\n\n +
+  নাম: ${customerName}\n +
+  মোবাইল: ${phoneNumber}\n +
+  ঠিকানা: ${district}, ${area}, ${address}\n +
+  অতিরিক্ত: ${notes};
 
     window.open(
       "https://wa.me/8801624466213?text=" +
