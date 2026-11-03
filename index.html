@@ -14,6 +14,16 @@
 .zoom-tools button{min-width:42px;font-size:18px;padding:9px}
 #zoomClose{font-size:14px}
 .zoom-hint{position:absolute;top:18px;left:14px;color:#ddd;font-size:12px}
+
+/* Scrolling brand messages directly below the navigation */
+.promo-ticker{width:100%;overflow:hidden;background:linear-gradient(90deg,#171109,#090909,#171109);border-top:1px solid #44351b;border-bottom:1px solid #44351b;padding:13px 0;white-space:nowrap}
+.promo-ticker-track{display:flex;align-items:center;gap:22px;width:max-content;animation:starlingTicker 26s ease-in-out infinite alternate;font-size:clamp(15px,1.8vw,22px);font-weight:700;color:#f4e8c8}
+.promo-ticker-track span{display:inline-block;white-space:nowrap}.promo-ticker-track .ticker-gold{color:#e8bd58;letter-spacing:1.2px}.promo-ticker-track .ticker-light{color:#fff}.promo-ticker-track .ticker-sep{color:#e8bd58;font-weight:900;margin:0 2px}
+.promo-ticker:hover .promo-ticker-track{animation-play-state:paused}
+@keyframes starlingTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.featured{padding:20px 0 28px}.featured-head{margin-bottom:12px}.featured-head h2{font-size:clamp(22px,3vw,30px);color:#e8bd58}
+.featured-card{flex-basis:calc((100% - 26px)/3);box-shadow:0 8px 22px #0008}.featured-photo{height:clamp(230px,27vw,340px);background:#f4f1eb;padding:8px}.featured-photo img{width:100%;height:100%;object-fit:contain;display:block}.featured-info{background:#111;padding:13px}.featured-info h3{font-size:16px}.featured-info a{font-size:13px}
+@media(max-width:700px){.promo-ticker{padding:10px 0}.promo-ticker-track{gap:14px;font-size:15px;animation-duration:22s}.featured{padding:14px 0 20px}.featured-card{flex-basis:88%}.featured-photo{height:260px}.featured-info h3{font-size:16px}}
 </style></head><body>
 <div id="imageZoom" aria-modal="true" role="dialog" aria-label="পণ্যের বড় ছবি দেখতে" onclick="if(event.target===this)window.closeProductZoom()">
   <span class="zoom-hint">ছবি বড় করে দেখতে + / − চাপুন</span>
@@ -21,8 +31,11 @@
   <img id="zoomedProductImage" alt="বড় করে দেখা পণ্যের ছবি">
 </div>
 <header><div class="wrap nav"><a class="brand" href="#home"><span style="font-size:15px">⭐</span><span class="brand-title">STARLING FASHION<small>STYLE • QUALITY</small></span><span class="brand-clothes" aria-label="পাঞ্জাবি, টি-শার্ট ও শার্ট"><span class="clothing-item"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA3MiI+PHBhdGggZD0iTTIyIDUgMzIgMTIgNDIgNSA1NyAxNSA1MSAzMSA0NCAyNyA0NiA2NiAxOCA2NiAyMCAyNyAxMyAzMSA3IDE1WiIgZmlsbD0iI2U4YmQ1OCIgc3Ryb2tlPSIjZmZmMGFkIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNMzIgMTJ2NDhNMjcgMTlsNSA1IDUtNU0zMiAyNHY3IiBmaWxsPSJub25lIiBzdHJva2U9IiM0YTM1MTIiIHN0cm9rZS13aWR0aD0iMiIvPjxjaXJjbGUgY3g9IjM2IiBjeT0iMzciIHI9IjEuNSIgZmlsbD0iIzRhMzUxMiIvPjxjaXJjbGUgY3g9IjM2IiBjeT0iNDQiIHI9IjEuNSIgZmlsbD0iIzRhMzUxMiIvPjwvc3ZnPg==" alt="পাঞ্জাবি"><small>পাঞ্জাবি</small></span><span class="clothing-item"><img src="data:image/svg+xml;base64,data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA3MiI+PHBhdGggZD0iTTIxIDggMzIgMTQgNDMgOCA1OSAyMCA1MCAzNCA0NCAyOSA0NiA2NkgxOGwyLTM3LTYgNUw1IDIwWiIgZmlsbD0iIzE3MTcxNyIgc3Ryb2tlPSIjZThiZDU4IiBzdHJva2Utd2lkdGg9IjIuNSIvPjxwYXRoIGQ9Im0zMiAyMiAzIDggOCAxLTYgNSAyIDgtNy01LTcgNSAyLTgtNi01IDgtMVoiIGZpbGw9IiNlOGJkNTgiLz48cGF0aCBkPSJNMjUgNTNoMTQiIHN0cm9rZT0iI2U4YmQ1OCIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iMzIiIHk9IjE4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iNSIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNmZmYwYWQiPlJPQ0s8L3RleHQ+PC9zdmc+" alt="টি-শার্ট"><small>রকস্টার টি</small></span><span class="clothing-item"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA3MiI+PHBhdGggZD0iTTIwIDcgMzIgMTMgNDQgNyA1OCAxOSA1MSAzMiA0NSAyNyA0NyA2NkgxN2wyLTM5LTYgNUw2IDE5WiIgZmlsbD0iI2Q5ZTRlZCIgc3Ryb2tlPSIjZThiZDU4IiBzdHJva2Utd2lkdGg9IjIuNSIvPjxwYXRoIGQ9Im0yMCA3IDEyIDE1TDQ0IDdNMzIgMjJ2NDNtLTgtMzBoNW02IDBoNW0tMTYgOWg1bTYgMGg1IiBmaWxsPSJub25lIiBzdHJva2U9IiM1MjY3N2IiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==" alt="শার্ট"><small>শার্ট</small></span></span></a><nav><a href="#home">হোম</a><a href="#products">পণ্য</a><a href="#order">অর্ডার</a><a href="#account">আমার অ্যাকাউন্ট</a><a href="#account" onclick="window.showCustomerAuth('login')">Login</a><a href="#account" onclick="window.showCustomerAuth('signup')">Sign Up</a><a href="#track">অর্ডার ট্র্যাক</a><a href="#reviews">রেটিং</a></nav><a class="btn" href="#products">শপিং শুরু</a></div></header>
-<section class="featured wrap" id="home" aria-label="নতুন পণ্যের স্লাইডার">
-  <div class="featured-head"><div><span class="gold">STARLING FASHION</span><h2>নতুন কালেকশন</h2><p>পছন্দের পোশাকটি বেছে নিন</p></div><a class="btn" href="#products">সব পণ্য দেখুন</a></div>
+<div class="promo-ticker" aria-label="দোকানের পরিচিতি এক লাইনের স্লাইডার"><div class="promo-ticker-track">
+  <span class="ticker-gold">STYLE • QUALITY • CONFIDENCE</span><span class="ticker-sep">✦</span><span>স্টাইল হোক আপনার পরিচয়</span><span class="ticker-sep">✦</span><span class="ticker-light">জেন্টস ও কিডস ফ্যাশনের ট্রেন্ডি কালেকশন</span><span class="ticker-sep">✦</span><span>সারা বাংলাদেশে হোম ডেলিভারি</span>
+  <span class="ticker-sep">✦</span><span class="ticker-gold">STYLE • QUALITY • CONFIDENCE</span><span class="ticker-sep">✦</span><span>স্টাইল হোক আপনার পরিচয়</span><span class="ticker-sep">✦</span><span class="ticker-light">জেন্টস ও কিডস ফ্যাশনের ট্রেন্ডি কালেকশন</span><span class="ticker-sep">✦</span><span>সারা বাংলাদেশে হোম ডেলিভারি</span>
+</div></div>
+<section class="featured wrap" id="home" aria-label="পণ্যের ছবির স্লাইডার">
   <div class="featured-shell"><button class="slide-arrow" type="button" aria-label="আগের পণ্য" onclick="window.slideFeatured(-1)">‹</button><div class="featured-track" id="featuredTrack"><div class="featured-empty">পণ্য লোড হচ্ছে...</div></div><button class="slide-arrow" type="button" aria-label="পরের পণ্য" onclick="window.slideFeatured(1)">›</button></div>
   <div class="slide-dots" id="featuredDots" aria-label="স্লাইড নির্বাচন"></div>
 </section>
@@ -100,6 +113,8 @@ function renderFeatured(){
  if(!list.length){track.innerHTML='<div class="featured-empty">এখনো কোনো পণ্য যোগ করা হয়নি।</div>';dots.innerHTML="";return;}
  track.innerHTML=list.map(p=>`<article class="featured-card"><div class="featured-photo">${p.imageUrl?`<img src="${escapeHTML(p.imageUrl)}" alt="${escapeHTML(p.name)}" loading="lazy" onerror="this.style.display='none';this.parentElement.textContent='${escapeHTML(p.emoji||"👕")}'">`:escapeHTML(p.emoji||"👕")}</div><div class="featured-info"><h3>${escapeHTML(p.name)}</h3><span class="featured-price">${money(Number(p.price)*.9)}</span><span class="featured-old">${money(p.price)}</span><a href="#products">পণ্যটি দেখুন</a></div></article>`).join("");
  dots.innerHTML=list.map((p,i)=>`<button type="button" aria-label="স্লাইড ${i+1}" class="${i===0?'active':''}" onclick="window.goFeatured(${i})"></button>`).join("");
+ if(featuredTimer)clearInterval(featuredTimer);
+ featuredTimer=setInterval(()=>{const t=$("featuredTrack");if(!t||t.matches(":hover")||document.hidden)return;const card=t.querySelector(".featured-card");if(!card)return;const end=t.scrollWidth-t.clientWidth;if(t.scrollLeft>=end-8)t.scrollTo({left:0,behavior:"smooth"});else t.scrollBy({left:card.getBoundingClientRect().width+13,behavior:"smooth"});},3200);
 }
 window.slideFeatured=(dir)=>{const t=$("featuredTrack");if(!t)return;const card=t.querySelector('.featured-card');if(card)t.scrollBy({left:dir*(card.getBoundingClientRect().width+13),behavior:'smooth'});};
 window.goFeatured=(index)=>{const t=$("featuredTrack"),card=t?.querySelectorAll('.featured-card')[index];if(card)card.scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'});};
