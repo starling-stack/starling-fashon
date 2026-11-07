@@ -24,6 +24,14 @@
 .featured{padding:20px 0 28px}.featured-head{margin-bottom:12px}.featured-head h2{font-size:clamp(22px,3vw,30px);color:#e8bd58}
 .featured-card{flex-basis:calc((100% - 26px)/3);box-shadow:0 8px 22px #0008}.featured-photo{height:clamp(230px,27vw,340px);background:#f4f1eb;padding:8px}.featured-photo img{width:100%;height:100%;object-fit:contain;display:block}.featured-info{background:#111;padding:13px}.featured-info h3{font-size:16px}.featured-info a{font-size:13px}
 @media(max-width:700px){.promo-ticker{padding:10px 0}.promo-ticker-track{gap:14px;font-size:15px;animation-duration:22s}.featured{padding:14px 0 20px}.featured-card{flex-basis:88%}.featured-photo{height:260px}.featured-info h3{font-size:16px}}
+/* Homepage ads: show three or more uploaded images side by side */
+.ad-hero{padding:18px 0 24px}
+.ad-slider{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;position:static;overflow:visible;aspect-ratio:auto;min-height:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.ad-slide{position:relative;inset:auto;opacity:1;pointer-events:auto;min-width:0;overflow:hidden;border:1px solid #59451f;border-radius:12px;background:#15110a;box-shadow:0 8px 22px #0008}
+.ad-slide img{width:100%;height:clamp(150px,20vw,260px);object-fit:cover;display:block}
+.ad-caption{font-size:15px;padding:12px}
+.ad-empty{grid-column:1/-1;min-height:160px;border:1px dashed #59451f;border-radius:12px}
+@media(max-width:700px){.ad-hero{padding:12px 0 18px}.ad-slider{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.ad-slide{border-radius:8px}.ad-slide img{height:clamp(105px,27vw,170px)}.ad-caption{font-size:10px;padding:6px 4px}}
 
 /* Independent homepage advertising image slider */
 .ad-hero{padding:18px 0 24px}.ad-slider-shell{display:grid;grid-template-columns:38px minmax(0,1fr) 38px;align-items:center;gap:8px}.ad-slider{position:relative;overflow:hidden;border:1px solid #59451f;border-radius:14px;background:#15110a;min-height:220px;aspect-ratio:16/6;box-shadow:0 10px 28px #0009}.ad-slide{position:absolute;inset:0;opacity:0;transition:opacity .55s ease;pointer-events:none}.ad-slide.active{opacity:1}.ad-slide img{width:100%;height:100%;object-fit:cover;display:block}.ad-caption{position:absolute;left:0;right:0;bottom:0;padding:18px 22px;background:linear-gradient(transparent,#000c);color:#fff;font-size:clamp(15px,2.4vw,25px);font-weight:700;text-shadow:0 2px 5px #000}.ad-arrow{width:36px;height:42px;padding:0;font-size:28px;line-height:1}.ad-dots{display:flex;justify-content:center;gap:7px;margin-top:10px}.ad-dots button{width:8px;height:8px;min-width:8px;padding:0;border-radius:50%;background:#66532e}.ad-dots button.active{background:#e8bd58;transform:scale(1.3)}.ad-empty{display:grid;place-items:center;min-height:220px;color:#bca66f;text-align:center;padding:20px}.ad-manage-item{display:flex;gap:12px;align-items:center;margin:10px 0;padding:10px;border:1px solid #49391f;border-radius:9px}.ad-manage-item img{width:100px;height:65px;object-fit:cover;border-radius:6px}.ad-manage-item button{margin-left:auto;white-space:nowrap}
@@ -40,12 +48,8 @@
   <span class="ticker-sep">✦</span><span class="ticker-gold">STYLE • QUALITY • CONFIDENCE</span><span class="ticker-sep">✦</span><span>স্টাইল হোক আপনার পরিচয়</span><span class="ticker-sep">✦</span><span class="ticker-light">জেন্টস ও কিডস ফ্যাশনের ট্রেন্ডি কালেকশন</span><span class="ticker-sep">✦</span><span>সারা বাংলাদেশে হোম ডেলিভারি</span>
 </div></div>
 <section class="ad-hero wrap" id="home" aria-label="দোকানের বিজ্ঞাপন">
-  <div class="ad-slider-shell">
-    <button class="ad-arrow" type="button" aria-label="আগের বিজ্ঞাপন" onclick="window.slideAd(-1)">‹</button>
-    <div class="ad-slider" id="adSlider"><div class="ad-empty">বিজ্ঞাপনের ছবি লোড হচ্ছে...</div></div>
-    <button class="ad-arrow" type="button" aria-label="পরের বিজ্ঞাপন" onclick="window.slideAd(1)">›</button>
-  </div>
-  <div class="ad-dots" id="adDots" aria-label="বিজ্ঞাপন নির্বাচন"></div>
+  <div class="ad-slider" id="adSlider"><div class="ad-empty">বিজ্ঞাপনের ছবি লোড হচ্ছে...</div></div>
+  <div class="ad-dots" id="adDots" aria-label="বিজ্ঞাপন নির্বাচন" style="display:none"></div>
 </section>
 <div class="offer">🔥 গ্র্যান্ড ওপেনিং — সকল পণ্যে ১০% ছাড়!</div>
 <section class="section" id="account" style="display:none"><div class="wrap"><h2 class="title">আমার <span class="gold">কাস্টমার অ্যাকাউন্ট</span></h2><div class="panel" style="max-width:760px;margin:auto"><div id="customerAuthArea"><p class="muted">নিজের নামে অ্যাকাউন্ট খুলুন অথবা আগের অ্যাকাউন্টে লগইন করুন। এরপর অর্ডার ও লেনদেনের অবস্থা দেখতে পারবেন।</p><div class="auth-tabs" style="display:flex;gap:10px;margin:12px 0"><button type="button" id="signupTab" onclick="window.showCustomerAuth('signup')">Sign Up / অ্যাকাউন্ট খুলুন</button><button type="button" id="loginTab" onclick="window.showCustomerAuth('login')">Login / লগইন</button></div><div class="row"><form id="customerRegister"><h3>নতুন অ্যাকাউন্ট খুলুন</h3><input id="customerName" required placeholder="আপনার পূর্ণ নাম"><select id="customerRegisterMethod"><option value="email">ইমেইল দিয়ে রেজিস্ট্রেশন</option><option value="phone">মোবাইল নম্বর দিয়ে রেজিস্ট্রেশন</option></select><div id="registerEmailFields"><input id="customerEmail" type="email" placeholder="আপনার ইমেইল"><input id="customerPassword" type="password" minlength="6" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)"></div><div id="registerPhoneFields" style="display:none"><input id="customerPhone" type="tel" placeholder="মোবাইল নম্বর (যেমন 017XXXXXXXX)"><input id="customerPhonePassword" type="password" minlength="6" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)"></div><button type="submit" id="registerSubmit">অ্যাকাউন্ট খুলুন</button></form><form id="customerLogin"><h3>আগের অ্যাকাউন্টে লগইন</h3><select id="customerLoginMethod"><option value="email">ইমেইল দিয়ে লগইন</option><option value="phone">মোবাইল নম্বর দিয়ে লগইন</option></select><div id="loginEmailFields"><input id="customerLoginEmail" type="email" placeholder="ইমেইল আইডি"><input id="customerLoginPassword" type="password" placeholder="পাসওয়ার্ড"></div><div id="loginPhoneFields" style="display:none"><input id="customerLoginPhone" type="tel" placeholder="রেজিস্টার করা মোবাইল নম্বর"><input id="customerLoginPhonePassword" type="password" placeholder="পাসওয়ার্ড"></div><button type="submit" id="loginSubmit">লগইন করুন</button></form></div><div id="customerAuthMessage" class="small" aria-live="polite"></div></div><div id="customerDashboard" style="display:none"><p class="gold">আপনি লগইন করেছেন: <b id="customerWelcome"></b></p><button type="button" id="customerLogout">লগআউট</button></div></div></div></section>
@@ -124,16 +128,14 @@ function listenToCustomerOrders(user){if(stopCustomerOrders){stopCustomerOrders(
 let adSlides=[],adTimer=null,activeAdIndex=0,stopAdsListener=null;
 const adSlider=$("adSlider"),adDots=$("adDots"),manageHomepageAds=$("manageHomepageAds");
 function renderAds(){
- if(!adSlider||!adDots)return;
- if(!adSlides.length){adSlider.innerHTML='<div class="ad-empty">এখনো কোনো বিজ্ঞাপনের ছবি আপলোড করা হয়নি।</div>';adDots.innerHTML="";if(adTimer)clearInterval(adTimer);return;}
- if(activeAdIndex>=adSlides.length)activeAdIndex=0;
- adSlider.innerHTML=adSlides.map((a,i)=>`<div class="ad-slide ${i===activeAdIndex?'active':''}"><img src="${escapeHTML(a.imageUrl)}" alt="${escapeHTML(a.title||'STARLING FASHION বিজ্ঞাপন')}" loading="lazy">${a.title?`<div class="ad-caption">${escapeHTML(a.title)}</div>`:""}</div>`).join("");
- adDots.innerHTML=adSlides.map((a,i)=>`<button type="button" aria-label="বিজ্ঞাপন ${i+1}" class="${i===activeAdIndex?'active':''}" onclick="window.goAd(${i})"></button>`).join("");
- if(adTimer)clearInterval(adTimer);
- if(adSlides.length>1)adTimer=setInterval(()=>window.slideAd(1),4500);
+ if(!adSlider)return;
+ if(adTimer){clearInterval(adTimer);adTimer=null;}
+ if(!adSlides.length){adSlider.innerHTML='<div class="ad-empty">এখনো কোনো বিজ্ঞাপনের ছবি আপলোড করা হয়নি।</div>';if(adDots)adDots.innerHTML="";return;}
+ adSlider.innerHTML=adSlides.map(a=>`<article class="ad-slide"><img src="${escapeHTML(a.imageUrl)}" alt="${escapeHTML(a.title||'STARLING FASHION বিজ্ঞাপন')}" loading="lazy">${a.title?`<div class="ad-caption">${escapeHTML(a.title)}</div>`:""}</article>`).join("");
+ if(adDots)adDots.innerHTML="";
 }
-window.slideAd=dir=>{if(!adSlides.length)return;activeAdIndex=(activeAdIndex+dir+adSlides.length)%adSlides.length;renderAds()};
-window.goAd=index=>{if(index<0||index>=adSlides.length)return;activeAdIndex=index;renderAds()};
+window.slideAd=dir=>{};
+window.goAd=index=>{};
 function renderManageAds(){if(!manageHomepageAds)return;if(!adminUser){manageHomepageAds.innerHTML='<p class="small">বিজ্ঞাপন পরিচালনা করতে অ্যাডমিন লগইন করুন।</p>';return;}manageHomepageAds.innerHTML=adSlides.length?adSlides.map(a=>`<div class="ad-manage-item"><img src="${escapeHTML(a.imageUrl)}" alt="বিজ্ঞাপন"><div style="min-width:0;flex:1"><b>${escapeHTML(a.title||'শিরোনাম নেই')}</b><p class="small">হোম পেজে দেখানো হচ্ছে</p></div><button type="button" onclick="window.deleteHomepageAd('${a.id}')">মুছুন</button></div>`).join(''):'<p class="small">এখনো বিজ্ঞাপন যোগ করা হয়নি।</p>';}
 function listenToAds(){if(stopAdsListener)stopAdsListener();stopAdsListener=onSnapshot(query(collection(db,"homepageAds"),orderBy("createdAt","desc")),snap=>{adSlides=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.imageUrl);activeAdIndex=0;renderAds();renderManageAds();},err=>{console.error('Homepage ads:',err);adSlider.innerHTML='<div class="ad-empty">বিজ্ঞাপন লোড করা যায়নি। Firestore Rules পরীক্ষা করুন।</div>';});}
 // Firestore-only ad images: compress locally so each document stays well below Firestore's 1 MiB limit.
