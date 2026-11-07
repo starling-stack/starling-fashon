@@ -33,9 +33,72 @@
 .ad-empty{grid-column:1/-1;min-height:160px;border:1px dashed #59451f;border-radius:12px}
 @media(max-width:700px){.ad-hero{padding:12px 0 18px}.ad-slider{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.ad-slide{border-radius:8px}.ad-slide img{height:clamp(105px,27vw,170px)}.ad-caption{font-size:10px;padding:6px 4px}}
 
-/* Independent homepage advertising image slider */
-.ad-hero{padding:18px 0 24px}.ad-slider-shell{display:grid;grid-template-columns:38px minmax(0,1fr) 38px;align-items:center;gap:8px}.ad-slider{position:relative;overflow:hidden;border:1px solid #59451f;border-radius:14px;background:#15110a;min-height:220px;aspect-ratio:16/6;box-shadow:0 10px 28px #0009}.ad-slide{position:absolute;inset:0;opacity:0;transition:opacity .55s ease;pointer-events:none}.ad-slide.active{opacity:1}.ad-slide img{width:100%;height:100%;object-fit:cover;display:block}.ad-caption{position:absolute;left:0;right:0;bottom:0;padding:18px 22px;background:linear-gradient(transparent,#000c);color:#fff;font-size:clamp(15px,2.4vw,25px);font-weight:700;text-shadow:0 2px 5px #000}.ad-arrow{width:36px;height:42px;padding:0;font-size:28px;line-height:1}.ad-dots{display:flex;justify-content:center;gap:7px;margin-top:10px}.ad-dots button{width:8px;height:8px;min-width:8px;padding:0;border-radius:50%;background:#66532e}.ad-dots button.active{background:#e8bd58;transform:scale(1.3)}.ad-empty{display:grid;place-items:center;min-height:220px;color:#bca66f;text-align:center;padding:20px}.ad-manage-item{display:flex;gap:12px;align-items:center;margin:10px 0;padding:10px;border:1px solid #49391f;border-radius:9px}.ad-manage-item img{width:100px;height:65px;object-fit:cover;border-radius:6px}.ad-manage-item button{margin-left:auto;white-space:nowrap}
-@media(max-width:700px){.ad-hero{padding:12px 0 18px}.ad-slider-shell{grid-template-columns:28px minmax(0,1fr) 28px;gap:5px}.ad-slider{aspect-ratio:16/8;min-height:145px}.ad-empty{min-height:145px}.ad-arrow{width:27px;height:34px;font-size:23px}.ad-caption{padding:12px;font-size:15px}.ad-manage-item img{width:76px;height:55px}}
+/* STARLING FASHION — Three side-by-side homepage advertisements */
+.ad-hero{padding:18px 0 24px}
+.ad-slider{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:14px;
+  position:static !important;
+  overflow:visible !important;
+  aspect-ratio:auto !important;
+  min-height:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.ad-slide{
+  display:block;
+  position:relative !important;
+  inset:auto !important;
+  opacity:1 !important;
+  pointer-events:auto !important;
+  min-width:0;
+  overflow:hidden;
+  border:1px solid #59451f;
+  border-radius:12px;
+  background:#15110a;
+  box-shadow:0 8px 22px #0008;
+}
+.ad-slide img{
+  display:block;
+  width:100%;
+  height:clamp(120px,20vw,260px);
+  object-fit:cover;
+}
+.ad-caption{position:static;padding:10px;color:#fff;font-size:13px;background:#111}
+.ad-empty{
+  grid-column:1 / -1;
+  display:grid;
+  place-items:center;
+  min-height:160px;
+  border:1px dashed #59451f;
+  border-radius:12px;
+  color:#bca66f;
+  text-align:center;
+  padding:20px;
+}
+.ad-dots{display:none !important}
+.ad-manage-item{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin:10px 0;
+  padding:10px;
+  border:1px solid #49391f;
+  border-radius:9px;
+}
+.ad-manage-item img{width:100px;height:65px;object-fit:cover;border-radius:6px}
+.ad-manage-item button{margin-left:auto;white-space:nowrap}
+@media(max-width:700px){
+  .ad-hero{padding:12px 0 18px}
+  .ad-slider{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:6px}
+  .ad-slide{border-radius:7px}
+  .ad-slide img{height:clamp(100px,27vw,170px)}
+  .ad-caption{padding:6px 3px;font-size:10px}
+  .ad-manage-item img{width:76px;height:55px}
+}
 </style></head><body>
 <div id="imageZoom" aria-modal="true" role="dialog" aria-label="পণ্যের বড় ছবি দেখতে" onclick="if(event.target===this)window.closeProductZoom()">
   <span class="zoom-hint">ছবি বড় করে দেখতে + / − চাপুন</span>
