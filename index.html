@@ -24,71 +24,34 @@
 .featured{padding:20px 0 28px}.featured-head{margin-bottom:12px}.featured-head h2{font-size:clamp(22px,3vw,30px);color:#e8bd58}
 .featured-card{flex-basis:calc((100% - 26px)/3);box-shadow:0 8px 22px #0008}.featured-photo{height:clamp(230px,27vw,340px);background:#f4f1eb;padding:8px}.featured-photo img{width:100%;height:100%;object-fit:contain;display:block}.featured-info{background:#111;padding:13px}.featured-info h3{font-size:16px}.featured-info a{font-size:13px}
 @media(max-width:700px){.promo-ticker{padding:10px 0}.promo-ticker-track{gap:14px;font-size:15px;animation-duration:22s}.featured{padding:14px 0 20px}.featured-card{flex-basis:88%}.featured-photo{height:260px}.featured-info h3{font-size:16px}}
-/* Homepage ads: show three or more uploaded images side by side */
+/* STARLING FASHION — one-at-a-time homepage advertisement slider */
 .ad-hero{padding:18px 0 24px}
-.ad-slider{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;position:static;overflow:visible;aspect-ratio:auto;min-height:0;border:0;border-radius:0;background:transparent;box-shadow:none}
-.ad-slide{position:relative;inset:auto;opacity:1;pointer-events:auto;min-width:0;overflow:hidden;border:1px solid #59451f;border-radius:12px;background:#15110a;box-shadow:0 8px 22px #0008}
-.ad-slide img{width:100%;height:clamp(150px,20vw,260px);object-fit:cover;display:block}
-.ad-caption{font-size:15px;padding:12px}
-.ad-empty{grid-column:1/-1;min-height:160px;border:1px dashed #59451f;border-radius:12px}
-@media(max-width:700px){.ad-hero{padding:12px 0 18px}.ad-slider{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.ad-slide{border-radius:8px}.ad-slide img{height:clamp(105px,27vw,170px)}.ad-caption{font-size:10px;padding:6px 4px}}
-
-/* Independent homepage advertising image slider */
-.ad-hero{padding:18px 0 24px}.ad-slider-shell{display:grid;grid-template-columns:38px minmax(0,1fr) 38px;align-items:center;gap:8px}.ad-slider{position:relative;overflow:hidden;border:1px solid #59451f;border-radius:14px;background:#15110a;min-height:220px;aspect-ratio:16/6;box-shadow:0 10px 28px #0009}.ad-slide{position:absolute;inset:0;opacity:0;transition:opacity .55s ease;pointer-events:none}.ad-slide.active{opacity:1}.ad-slide img{width:100%;height:100%;object-fit:cover;display:block}.ad-caption{position:absolute;left:0;right:0;bottom:0;padding:18px 22px;background:linear-gradient(transparent,#000c);color:#fff;font-size:clamp(15px,2.4vw,25px);font-weight:700;text-shadow:0 2px 5px #000}.ad-arrow{width:36px;height:42px;padding:0;font-size:28px;line-height:1}.ad-dots{display:flex;justify-content:center;gap:7px;margin-top:10px}.ad-dots button{width:8px;height:8px;min-width:8px;padding:0;border-radius:50%;background:#66532e}.ad-dots button.active{background:#e8bd58;transform:scale(1.3)}.ad-empty{display:grid;place-items:center;min-height:220px;color:#bca66f;text-align:center;padding:20px}.ad-manage-item{display:flex;gap:12px;align-items:center;margin:10px 0;padding:10px;border:1px solid #49391f;border-radius:9px}.ad-manage-item img{width:100px;height:65px;object-fit:cover;border-radius:6px}.ad-manage-item button{margin-left:auto;white-space:nowrap}
-@media(max-width:700px){.ad-hero{padding:12px 0 18px}.ad-slider-shell{grid-template-columns:28px minmax(0,1fr) 28px;gap:5px}.ad-slider{aspect-ratio:16/8;min-height:145px}.ad-empty{min-height:145px}.ad-arrow{width:27px;height:34px;font-size:23px}.ad-caption{padding:12px;font-size:15px}.ad-manage-item img{width:76px;height:55px}}
-
-/* STARLING FASHION — show three homepage advertisements side by side */
-.ad-slider-shell{display:block !important}
-.ad-slider{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:12px;position:static !important;overflow:visible !important;aspect-ratio:auto !important;min-height:0 !important;border:0 !important;border-radius:0 !important;background:transparent !important;box-shadow:none !important}
-.ad-slide{display:block !important;position:relative !important;inset:auto !important;opacity:1 !important;pointer-events:auto !important;min-width:0;overflow:hidden;border:1px solid #59451f;border-radius:12px;background:#15110a;box-shadow:0 8px 22px #0008}
-.ad-slide img{display:block;width:100%;height:clamp(120px,20vw,260px);object-fit:cover}
-.ad-caption{position:static !important;padding:9px 10px;background:#111;color:#fff;font-size:13px}
-.ad-dots,.ad-arrow{display:none !important}
-@media(max-width:700px){.ad-slider{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:6px}.ad-slide{border-radius:7px}.ad-slide img{height:clamp(95px,27vw,165px)}.ad-caption{padding:6px 3px;font-size:10px}}
-\n/* 3D circular homepage advertisement ring */
-#adSlider.ad-slider{
-  display:block !important; position:relative !important; overflow:hidden !important;
-  width:100%; min-height:0 !important; aspect-ratio:auto !important;
-  border:0 !important; border-radius:0 !important; background:transparent !important;
-  box-shadow:none !important; perspective:1100px; isolation:isolate;
-}
-#adSlider .ad-ring-stage{
-  position:relative; width:100%; height:clamp(250px,33vw,370px);
-  display:grid; place-items:center; overflow:hidden; perspective:1100px;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
-  mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
-}
-#adSlider .ad-ring{
-  position:relative; width:100%; height:100%; transform-style:preserve-3d;
-  animation:starlingAdRingSpin 30s linear infinite; will-change:transform;
-}
-#adSlider .ad-ring-card{
-  position:absolute !important; left:50% !important; top:50% !important;
-  width:clamp(170px,27%,290px); height:82%; margin:0 !important;
-  padding:0; overflow:hidden; border:1px solid #b18a3d; border-radius:14px;
-  background:#15110a; box-shadow:0 14px 34px #000b,0 0 18px #e8bd5822;
-  transform:translate(-50%,-50%) rotateY(var(--ad-angle)) translateZ(var(--ad-radius));
-  transform-style:preserve-3d; backface-visibility:hidden; -webkit-backface-visibility:hidden;
-}
-#adSlider .ad-ring-card img{display:block;width:100%;height:100%;object-fit:contain;background:#0b0b0b}
-#adSlider .ad-ring-card .ad-caption{
-  position:absolute !important; left:0; right:0; bottom:0; padding:13px 12px;
-  background:linear-gradient(transparent,#000e); color:#fff; text-align:center;
-  font-size:14px; font-weight:700;
-}
-#adSlider .ad-ring-empty{
-  min-height:180px; display:grid; place-items:center; padding:24px;
-  border:1px dashed #8b6a2d; border-radius:14px; color:#cbb47d; text-align:center;
-  background:linear-gradient(145deg,#17130a,#090909);
-}
-#adSlider:hover .ad-ring,#adSlider:focus-within .ad-ring{animation-play-state:paused}
-@keyframes starlingAdRingSpin{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
+.ad-slider-shell{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;align-items:center;gap:9px}
+#adSlider.ad-slider{display:block !important;position:relative !important;width:100%;height:clamp(230px,36vw,410px);min-height:0 !important;aspect-ratio:auto !important;overflow:hidden !important;border:1px solid #59451f !important;border-radius:15px !important;background:#090909 !important;box-shadow:0 10px 28px #0009 !important;touch-action:pan-y;cursor:grab;}
+#adSlider.ad-slider.is-dragging{cursor:grabbing}
+#adSlider .ad-track{display:flex;width:100%;height:100%;transition:transform .62s cubic-bezier(.22,.75,.25,1);will-change:transform}
+#adSlider .ad-slide{position:relative !important;inset:auto !important;display:block !important;flex:0 0 100%;width:100%;height:100%;min-width:0;opacity:1 !important;pointer-events:auto !important;overflow:hidden;border:0;border-radius:0;background:#090909}
+#adSlider .ad-slide img{display:block;width:100%;height:100%;object-fit:contain;background:#090909;pointer-events:none;-webkit-user-drag:none;user-select:none}
+#adSlider .ad-caption{position:absolute !important;left:0;right:0;bottom:0;padding:17px 22px;background:linear-gradient(transparent,#000d);color:#fff;text-align:center;font-size:clamp(14px,2vw,22px);font-weight:700;text-shadow:0 2px 5px #000;}
+.ad-arrow{width:40px;height:48px;padding:0;font-size:30px;line-height:1;border:1px solid #8b6a2d;box-shadow:0 4px 12px #0008}
+.ad-dots{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;margin-top:11px}
+.ad-dots button{width:9px;height:9px;min-width:9px;padding:0;border-radius:50%;background:#66532e;border:0;transition:transform .2s,background .2s}
+.ad-dots button.active{background:#e8bd58;transform:scale(1.35)}
+.ad-empty{display:grid;place-items:center;min-height:100%;color:#bca66f;text-align:center;padding:24px}
+.ad-slider-hint{text-align:center;color:#bca66f;font-size:12px;margin:9px 0 0}
+.ad-manage-item{display:flex;gap:12px;align-items:center;margin:10px 0;padding:10px;border:1px solid #49391f;border-radius:9px}
+.ad-manage-item img{width:100px;height:65px;object-fit:cover;border-radius:6px}
+.ad-manage-item button{margin-left:auto;white-space:nowrap}
 @media(max-width:700px){
-  #adSlider .ad-ring-stage{height:clamp(225px,67vw,290px);perspective:850px}
-  #adSlider .ad-ring-card{width:42%;height:78%;border-radius:9px}
-  #adSlider .ad-ring-card .ad-caption{padding:8px 5px;font-size:10px}
+ .ad-hero{padding:12px 0 18px}
+ .ad-slider-shell{grid-template-columns:29px minmax(0,1fr) 29px;gap:5px}
+ #adSlider.ad-slider{height:clamp(190px,58vw,300px);border-radius:9px !important}
+ .ad-arrow{width:28px;height:36px;font-size:23px}
+ #adSlider .ad-caption{padding:10px 8px;font-size:13px}
+ .ad-slider-hint{font-size:11px}
+ .ad-manage-item img{width:76px;height:55px}
 }
-@media(prefers-reduced-motion:reduce){#adSlider .ad-ring{animation:none}}
+@media(prefers-reduced-motion:reduce){#adSlider .ad-track{transition:none}}
 
 </style></head><body>
 <div id="imageZoom" aria-modal="true" role="dialog" aria-label="পণ্যের বড় ছবি দেখতে" onclick="if(event.target===this)window.closeProductZoom()">
@@ -102,8 +65,13 @@
   <span class="ticker-sep">✦</span><span class="ticker-gold">STYLE • QUALITY • CONFIDENCE</span><span class="ticker-sep">✦</span><span>স্টাইল হোক আপনার পরিচয়</span><span class="ticker-sep">✦</span><span class="ticker-light">জেন্টস ও কিডস ফ্যাশনের ট্রেন্ডি কালেকশন</span><span class="ticker-sep">✦</span><span>সারা বাংলাদেশে হোম ডেলিভারি</span>
 </div></div>
 <section class="ad-hero wrap" id="home" aria-label="দোকানের বিজ্ঞাপন">
-  <div class="ad-slider" id="adSlider"><div class="ad-empty">বিজ্ঞাপনের ছবি লোড হচ্ছে...</div></div>
-  <div class="ad-dots" id="adDots" aria-label="বিজ্ঞাপন নির্বাচন" style="display:none"></div>
+  <div class="ad-slider-shell">
+    <button class="ad-arrow" type="button" aria-label="আগের বিজ্ঞাপন" onclick="window.slideAd(-1)">‹</button>
+    <div class="ad-slider" id="adSlider" aria-roledescription="carousel" aria-label="হোমপেজ বিজ্ঞাপন" tabindex="0"><div class="ad-empty">বিজ্ঞাপনের ছবি লোড হচ্ছে...</div></div>
+    <button class="ad-arrow" type="button" aria-label="পরের বিজ্ঞাপন" onclick="window.slideAd(1)">›</button>
+  </div>
+  <div class="ad-dots" id="adDots" aria-label="বিজ্ঞাপন নির্বাচন"></div>
+  <p class="ad-slider-hint">বিজ্ঞাপনগুলো নিজে নিজে একটার পর একটা আসবে • আঙুল বা মাউস দিয়ে টেনে / তীর চিহ্নে চাপ দিয়ে নিয়ন্ত্রণ করুন</p>
 </section>
 <div class="offer">🔥 গ্র্যান্ড ওপেনিং — সকল পণ্যে ১০% ছাড়!</div>
 <section class="section" id="account" style="display:none"><div class="wrap"><h2 class="title">আমার <span class="gold">কাস্টমার অ্যাকাউন্ট</span></h2><div class="panel" style="max-width:760px;margin:auto"><div id="customerAuthArea"><p class="muted">নিজের নামে অ্যাকাউন্ট খুলুন অথবা আগের অ্যাকাউন্টে লগইন করুন। এরপর অর্ডার ও লেনদেনের অবস্থা দেখতে পারবেন।</p><div class="auth-tabs" style="display:flex;gap:10px;margin:12px 0"><button type="button" id="signupTab" onclick="window.showCustomerAuth('signup')">Sign Up / অ্যাকাউন্ট খুলুন</button><button type="button" id="loginTab" onclick="window.showCustomerAuth('login')">Login / লগইন</button></div><div class="row"><form id="customerRegister"><h3>নতুন অ্যাকাউন্ট খুলুন</h3><input id="customerName" required placeholder="আপনার পূর্ণ নাম"><select id="customerRegisterMethod"><option value="email">ইমেইল দিয়ে রেজিস্ট্রেশন</option><option value="phone">মোবাইল নম্বর দিয়ে রেজিস্ট্রেশন</option></select><div id="registerEmailFields"><input id="customerEmail" type="email" placeholder="আপনার ইমেইল"><input id="customerPassword" type="password" minlength="6" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)"></div><div id="registerPhoneFields" style="display:none"><input id="customerPhone" type="tel" placeholder="মোবাইল নম্বর (যেমন 017XXXXXXXX)"><input id="customerPhonePassword" type="password" minlength="6" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)"></div><button type="submit" id="registerSubmit">অ্যাকাউন্ট খুলুন</button></form><form id="customerLogin"><h3>আগের অ্যাকাউন্টে লগইন</h3><select id="customerLoginMethod"><option value="email">ইমেইল দিয়ে লগইন</option><option value="phone">মোবাইল নম্বর দিয়ে লগইন</option></select><div id="loginEmailFields"><input id="customerLoginEmail" type="email" placeholder="ইমেইল আইডি"><input id="customerLoginPassword" type="password" placeholder="পাসওয়ার্ড"></div><div id="loginPhoneFields" style="display:none"><input id="customerLoginPhone" type="tel" placeholder="রেজিস্টার করা মোবাইল নম্বর"><input id="customerLoginPhonePassword" type="password" placeholder="পাসওয়ার্ড"></div><button type="submit" id="loginSubmit">লগইন করুন</button></form></div><div id="customerAuthMessage" class="small" aria-live="polite"></div></div><div id="customerDashboard" style="display:none"><p class="gold">আপনি লগইন করেছেন: <b id="customerWelcome"></b></p><button type="button" id="customerLogout">লগআউট</button></div></div></div></section>
@@ -182,34 +150,78 @@ function listenToCustomerOrders(user){if(stopCustomerOrders){stopCustomerOrders(
 // Homepage advertisements are independent of the products collection.
 let adSlides=[],adTimer=null,activeAdIndex=0,stopAdsListener=null;
 const adSlider=$("adSlider"),adDots=$("adDots"),manageHomepageAds=$("manageHomepageAds");
+function stopAdAutoplay(){if(adTimer){clearInterval(adTimer);adTimer=null;}}
+function startAdAutoplay(){
+ stopAdAutoplay();
+ if(adSlides.length>1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+  adTimer=setInterval(()=>window.slideAd(1),4500);
+ }
+}
+function updateAdPosition(){
+ const track=adSlider?.querySelector(".ad-track");
+ if(track)track.style.transform=`translate3d(${-activeAdIndex*100}%,0,0)`;
+ if(adDots)adDots.querySelectorAll("button[data-ad-index]").forEach((b,i)=>{
+  b.classList.toggle("active",i===activeAdIndex);
+  b.setAttribute("aria-current",i===activeAdIndex?"true":"false");
+ });
+}
+window.goAd=index=>{
+ if(!adSlides.length)return;
+ const next=Number(index);
+ if(!Number.isFinite(next))return;
+ activeAdIndex=((Math.trunc(next)%adSlides.length)+adSlides.length)%adSlides.length;
+ updateAdPosition();
+ startAdAutoplay();
+};
+window.slideAd=direction=>{
+ if(!adSlides.length)return;
+ const step=Number(direction)||1;
+ window.goAd(activeAdIndex+(step>0?1:-1));
+};
 function renderAds(){
  if(!adSlider)return;
- if(adTimer){clearInterval(adTimer);adTimer=null;}
+ stopAdAutoplay();
  if(!adSlides.length){
-  adSlider.innerHTML='<div class="ad-ring-empty">এখনো কোনো বিজ্ঞাপনের ছবি আপলোড করা হয়নি।<br>অ্যাডমিন প্যানেল থেকে বিজ্ঞাপন যোগ করুন।</div>';
+  adSlider.innerHTML='<div class="ad-empty">এখনো কোনো বিজ্ঞাপনের ছবি আপলোড করা হয়নি।<br>অ্যাডমিন প্যানেল থেকে বিজ্ঞাপন যোগ করুন।</div>';
   if(adDots)adDots.innerHTML="";
   return;
  }
- // Six positions form a 3D ring; three cards face the viewer at a time.
- // With fewer than six uploads, existing ads repeat to fill the ring.
- const ringAds=adSlides.slice();
- while(ringAds.length<6) ringAds.push(adSlides[ringAds.length % adSlides.length]);
- const stageWidth=Math.max(280,adSlider.clientWidth||900);
- const isMobile=window.matchMedia("(max-width: 700px)").matches;
- const cardWidth=isMobile?stageWidth*.42:Math.min(290,stageWidth*.27);
- const idealRadius=(cardWidth/2)/Math.tan(Math.PI/ringAds.length)+38;
- const widthLimit=stageWidth*(isMobile ? .32 : .40);
- const radius=Math.round(Math.max(isMobile?85:245,Math.min(isMobile?220:450,idealRadius,widthLimit)));
- adSlider.innerHTML=`<div class="ad-ring-stage"><div class="ad-ring" style="--ad-radius:${radius}px">${ringAds.map((a,i)=>{
-  const angle=(360*i/ringAds.length).toFixed(2);
-  return `<article class="ad-ring-card" style="--ad-angle:${angle}deg" aria-label="বিজ্ঞাপন ${i+1}"><img src="${escapeHTML(a.imageUrl)}" alt="${escapeHTML(a.title||'STARLING FASHION বিজ্ঞাপন')}" loading="lazy">${a.title?`<div class="ad-caption">${escapeHTML(a.title)}</div>`:""}</article>`;
- }).join("")}</div></div>`;
- if(adDots)adDots.innerHTML="";
+ // Each uploaded advertisement appears once, in sequence, in the same viewport.
+ adSlider.innerHTML=`<div class="ad-track">${adSlides.map((a,i)=>
+  `<article class="ad-slide" role="group" aria-roledescription="slide" aria-label="বিজ্ঞাপন ${i+1} / ${adSlides.length}"><img src="${escapeHTML(a.imageUrl)}" alt="${escapeHTML(a.title||'STARLING FASHION বিজ্ঞাপন') }" ${i===0?'fetchpriority="high"':'loading="lazy"'} draggable="false">${a.title?`<div class="ad-caption">${escapeHTML(a.title)}</div>`:""}</article>`
+ ).join("")}</div>`;
+ if(adDots){
+  adDots.innerHTML=adSlides.length>1?adSlides.map((a,i)=>`<button type="button" data-ad-index="${i}" class="${i===0?'active':''}" aria-label="বিজ্ঞাপন ${i+1} দেখুন" aria-current="${i===0?'true':'false'}"></button>`).join(""):"";
+  adDots.querySelectorAll("button[data-ad-index]").forEach(button=>button.addEventListener("click",()=>window.goAd(Number(button.dataset.adIndex))));
+ }
+ activeAdIndex=Math.min(activeAdIndex,adSlides.length-1);
+ updateAdPosition();
+ startAdAutoplay();
 }
-window.slideAd=dir=>{};
-window.goAd=index=>{};
+// Pause while the visitor is interacting; support mouse, touch and pen swipes.
+let adPointerStartX=0,adPointerStartY=0,adPointerId=null;
+adSlider?.addEventListener("pointerdown",event=>{
+ if(event.pointerType==="mouse" && event.button!==0)return;
+ adPointerStartX=event.clientX;adPointerStartY=event.clientY;adPointerId=event.pointerId;
+ stopAdAutoplay();adSlider.classList.add("is-dragging");
+ try{adSlider.setPointerCapture(event.pointerId)}catch(_){/* capture is optional */}
+});
+adSlider?.addEventListener("pointerup",event=>{
+ if(adPointerId===null||event.pointerId!==adPointerId)return;
+ const dx=event.clientX-adPointerStartX,dy=event.clientY-adPointerStartY;
+ adPointerId=null;adSlider.classList.remove("is-dragging");
+ if(Math.abs(dx)>35 && Math.abs(dx)>Math.abs(dy)*1.15)window.slideAd(dx<0?1:-1);
+ else startAdAutoplay();
+});
+adSlider?.addEventListener("pointercancel",()=>{adPointerId=null;adSlider.classList.remove("is-dragging");startAdAutoplay();});
+adSlider?.addEventListener("keydown",event=>{
+ if(event.key==="ArrowRight"){event.preventDefault();window.slideAd(1)}
+ if(event.key==="ArrowLeft"){event.preventDefault();window.slideAd(-1)}
+});
+adSlider?.addEventListener("mouseenter",stopAdAutoplay);
+adSlider?.addEventListener("mouseleave",startAdAutoplay);
 function renderManageAds(){if(!manageHomepageAds)return;if(!adminUser){manageHomepageAds.innerHTML='<p class="small">বিজ্ঞাপন পরিচালনা করতে অ্যাডমিন লগইন করুন।</p>';return;}manageHomepageAds.innerHTML=adSlides.length?adSlides.map(a=>`<div class="ad-manage-item"><img src="${escapeHTML(a.imageUrl)}" alt="বিজ্ঞাপন"><div style="min-width:0;flex:1"><b>${escapeHTML(a.title||'শিরোনাম নেই')}</b><p class="small">হোম পেজে দেখানো হচ্ছে</p></div><button type="button" onclick="window.deleteHomepageAd('${a.id}')">মুছুন</button></div>`).join(''):'<p class="small">এখনো বিজ্ঞাপন যোগ করা হয়নি।</p>';}
-function listenToAds(){if(stopAdsListener)stopAdsListener();stopAdsListener=onSnapshot(query(collection(db,"homepageAds"),orderBy("createdAt","desc")),snap=>{adSlides=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.imageUrl);activeAdIndex=0;renderAds();renderManageAds();},err=>{console.error('Homepage ads:',err);adSlider.innerHTML='<div class="ad-ring-empty">বিজ্ঞাপন লোড করা যায়নি। Firestore Rules পরীক্ষা করুন।</div>';});}
+function listenToAds(){if(stopAdsListener)stopAdsListener();stopAdsListener=onSnapshot(query(collection(db,"homepageAds"),orderBy("createdAt","desc")),snap=>{adSlides=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.imageUrl);activeAdIndex=0;renderAds();renderManageAds();},err=>{console.error('Homepage ads:',err);adSlider.innerHTML='<div class="ad-empty">বিজ্ঞাপন লোড করা যায়নি। Firestore Rules পরীক্ষা করুন।</div>';});}
 // Firestore-only ad images: compress locally so each document stays well below Firestore's 1 MiB limit.
 async function compressAdImage(file){
  const bitmap=await createImageBitmap(file);
