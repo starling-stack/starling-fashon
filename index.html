@@ -45,6 +45,51 @@
 .ad-caption{position:static !important;padding:9px 10px;background:#111;color:#fff;font-size:13px}
 .ad-dots,.ad-arrow{display:none !important}
 @media(max-width:700px){.ad-slider{grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:6px}.ad-slide{border-radius:7px}.ad-slide img{height:clamp(95px,27vw,165px)}.ad-caption{padding:6px 3px;font-size:10px}}
+\n/* 3D circular homepage advertisement ring */
+#adSlider.ad-slider{
+  display:block !important; position:relative !important; overflow:hidden !important;
+  width:100%; min-height:0 !important; aspect-ratio:auto !important;
+  border:0 !important; border-radius:0 !important; background:transparent !important;
+  box-shadow:none !important; perspective:1100px; isolation:isolate;
+}
+#adSlider .ad-ring-stage{
+  position:relative; width:100%; height:clamp(250px,33vw,370px);
+  display:grid; place-items:center; overflow:hidden; perspective:1100px;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+}
+#adSlider .ad-ring{
+  position:relative; width:100%; height:100%; transform-style:preserve-3d;
+  animation:starlingAdRingSpin 30s linear infinite; will-change:transform;
+}
+#adSlider .ad-ring-card{
+  position:absolute !important; left:50% !important; top:50% !important;
+  width:clamp(170px,27%,290px); height:82%; margin:0 !important;
+  padding:0; overflow:hidden; border:1px solid #b18a3d; border-radius:14px;
+  background:#15110a; box-shadow:0 14px 34px #000b,0 0 18px #e8bd5822;
+  transform:translate(-50%,-50%) rotateY(var(--ad-angle)) translateZ(var(--ad-radius));
+  transform-style:preserve-3d; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+}
+#adSlider .ad-ring-card img{display:block;width:100%;height:100%;object-fit:contain;background:#0b0b0b}
+#adSlider .ad-ring-card .ad-caption{
+  position:absolute !important; left:0; right:0; bottom:0; padding:13px 12px;
+  background:linear-gradient(transparent,#000e); color:#fff; text-align:center;
+  font-size:14px; font-weight:700;
+}
+#adSlider .ad-ring-empty{
+  min-height:180px; display:grid; place-items:center; padding:24px;
+  border:1px dashed #8b6a2d; border-radius:14px; color:#cbb47d; text-align:center;
+  background:linear-gradient(145deg,#17130a,#090909);
+}
+#adSlider:hover .ad-ring,#adSlider:focus-within .ad-ring{animation-play-state:paused}
+@keyframes starlingAdRingSpin{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
+@media(max-width:700px){
+  #adSlider .ad-ring-stage{height:clamp(225px,67vw,290px);perspective:850px}
+  #adSlider .ad-ring-card{width:42%;height:78%;border-radius:9px}
+  #adSlider .ad-ring-card .ad-caption{padding:8px 5px;font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){#adSlider .ad-ring{animation:none}}
+
 </style></head><body>
 <div id="imageZoom" aria-modal="true" role="dialog" aria-label="পণ্যের বড় ছবি দেখতে" onclick="if(event.target===this)window.closeProductZoom()">
   <span class="zoom-hint">ছবি বড় করে দেখতে + / − চাপুন</span>
@@ -140,14 +185,31 @@ const adSlider=$("adSlider"),adDots=$("adDots"),manageHomepageAds=$("manageHomep
 function renderAds(){
  if(!adSlider)return;
  if(adTimer){clearInterval(adTimer);adTimer=null;}
- if(!adSlides.length){adSlider.innerHTML='<div class="ad-empty">এখনো কোনো বিজ্ঞাপনের ছবি আপলোড করা হয়নি।</div>';if(adDots)adDots.innerHTML="";return;}
- adSlider.innerHTML=adSlides.map(a=>`<article class="ad-slide"><img src="${escapeHTML(a.imageUrl)}" alt="${escapeHTML(a.title||'STARLING FASHION বিজ্ঞাপন')}" loading="lazy">${a.title?`<div class="ad-caption">${escapeHTML(a.title)}</div>`:""}</article>`).join("");
+ if(!adSlides.length){
+  adSlider.innerHTML='<div class="ad-ring-empty">এখনো কোনো বিজ্ঞাপনের ছবি আপলোড করা হয়নি।<br>অ্যাডমিন প্যানেল থেকে বিজ্ঞাপন যোগ করুন।</div>';
+  if(adDots)adDots.innerHTML="";
+  return;
+ }
+ // Six positions form a 3D ring; three cards face the viewer at a time.
+ // With fewer than six uploads, existing ads repeat to fill the ring.
+ const ringAds=adSlides.slice();
+ while(ringAds.length<6) ringAds.push(adSlides[ringAds.length % adSlides.length]);
+ const stageWidth=Math.max(280,adSlider.clientWidth||900);
+ const isMobile=window.matchMedia("(max-width: 700px)").matches;
+ const cardWidth=isMobile?stageWidth*.42:Math.min(290,stageWidth*.27);
+ const idealRadius=(cardWidth/2)/Math.tan(Math.PI/ringAds.length)+38;
+ const widthLimit=stageWidth*(isMobile ? .32 : .40);
+ const radius=Math.round(Math.max(isMobile?85:245,Math.min(isMobile?220:450,idealRadius,widthLimit)));
+ adSlider.innerHTML=`<div class="ad-ring-stage"><div class="ad-ring" style="--ad-radius:${radius}px">${ringAds.map((a,i)=>{
+  const angle=(360*i/ringAds.length).toFixed(2);
+  return `<article class="ad-ring-card" style="--ad-angle:${angle}deg" aria-label="বিজ্ঞাপন ${i+1}"><img src="${escapeHTML(a.imageUrl)}" alt="${escapeHTML(a.title||'STARLING FASHION বিজ্ঞাপন')}" loading="lazy">${a.title?`<div class="ad-caption">${escapeHTML(a.title)}</div>`:""}</article>`;
+ }).join("")}</div></div>`;
  if(adDots)adDots.innerHTML="";
 }
 window.slideAd=dir=>{};
 window.goAd=index=>{};
 function renderManageAds(){if(!manageHomepageAds)return;if(!adminUser){manageHomepageAds.innerHTML='<p class="small">বিজ্ঞাপন পরিচালনা করতে অ্যাডমিন লগইন করুন।</p>';return;}manageHomepageAds.innerHTML=adSlides.length?adSlides.map(a=>`<div class="ad-manage-item"><img src="${escapeHTML(a.imageUrl)}" alt="বিজ্ঞাপন"><div style="min-width:0;flex:1"><b>${escapeHTML(a.title||'শিরোনাম নেই')}</b><p class="small">হোম পেজে দেখানো হচ্ছে</p></div><button type="button" onclick="window.deleteHomepageAd('${a.id}')">মুছুন</button></div>`).join(''):'<p class="small">এখনো বিজ্ঞাপন যোগ করা হয়নি।</p>';}
-function listenToAds(){if(stopAdsListener)stopAdsListener();stopAdsListener=onSnapshot(query(collection(db,"homepageAds"),orderBy("createdAt","desc")),snap=>{adSlides=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.imageUrl);activeAdIndex=0;renderAds();renderManageAds();},err=>{console.error('Homepage ads:',err);adSlider.innerHTML='<div class="ad-empty">বিজ্ঞাপন লোড করা যায়নি। Firestore Rules পরীক্ষা করুন।</div>';});}
+function listenToAds(){if(stopAdsListener)stopAdsListener();stopAdsListener=onSnapshot(query(collection(db,"homepageAds"),orderBy("createdAt","desc")),snap=>{adSlides=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.imageUrl);activeAdIndex=0;renderAds();renderManageAds();},err=>{console.error('Homepage ads:',err);adSlider.innerHTML='<div class="ad-ring-empty">বিজ্ঞাপন লোড করা যায়নি। Firestore Rules পরীক্ষা করুন।</div>';});}
 // Firestore-only ad images: compress locally so each document stays well below Firestore's 1 MiB limit.
 async function compressAdImage(file){
  const bitmap=await createImageBitmap(file);
